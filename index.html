@@ -65,10 +65,18 @@
     y += dy;
     if (y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
       dy *= -1;
+    } else if (x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
+      if ((y > redPaddleY && y < redPaddleY + paddleHeight)
+          || (y > bluePaddleY && y < bluePaddleY + paddleHeight)) {
+        dx *= -1;
+      } else {
+        if (x === ballRadius)
+          alert("game win red!"); // game restart 버튼으로 대체 
+        else
+          alert("game win blue!");
+      }
     }
-    if (x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
-      dx *= -1;
-    }
+    
     if (upPressedRed && redPaddleY > 0) {
       redPaddleY -= 5;
     } else if (downPressedRed && redPaddleY < canvas.height - paddleHeight) {
