@@ -1,0 +1,21 @@
+version: "3"
+services:
+  game:
+    image: game_img
+    container_name: game
+    build: app/
+    restart: always
+    init: true
+    ports:
+      - 5500:5500
+    volumes:
+      - front:/home
+      - /home/node_modules
+
+volumes:
+  front:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/app/
